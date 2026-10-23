@@ -1,0 +1,31 @@
+{
+  "name": "opencode-plugin-template-dual-v2",
+  "version": "0.1.0",
+  "description": "Reusable OpenCode plugin template supporting dual V1+V2 shape during migration, with an automated convergence script to V2-only.",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@opencode/plugin": "2.0.32",
+    "@opencode-ai/plugin": "1.17.8",
+    "zod": "^4.1.8"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  },
+  "keywords": [
+    "opencode",
+    "plugin",
+    "template",
+    "v2",
+    "migration"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lenathloup/opencode-plugin-template-dual-v2.git"
+  }
+}
