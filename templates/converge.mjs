@@ -22,8 +22,19 @@ if (!inputPath) {
   console.error("Usage: node converge.mjs <file> [--in-place] [--out <path>]")
   process.exit(1)
 }
+if (outIdx !== -1 && !outPath) {
+  console.error("Error: --out requires a value")
+  process.exit(1)
+}
 
-const src = readFileSync(inputPath, "utf-8")
+let src
+try {
+  src = readFileSync(inputPath, "utf-8")
+} catch (err) {
+  console.error("Error: cannot read file: " + inputPath)
+  console.error(err instanceof Error ? err.message : String(err))
+  process.exit(1)
+}
 
 const hadV1Import = /@opencode-ai\/plugin/.test(src)
 const hadServer = /\bserver\s*:/.test(src)
@@ -138,6 +149,13 @@ const target = inPlace
   ? inputPath
   : outPath || inputPath.replace(/\.ts$/, ".v2.ts")
 
-writeFileSync(target, out, "utf-8")
+try {
+  writeFileSync(target, out, "utf-8")
+} catch (err) {
+  console.error("Error: cannot write file: " + target)
+  console.error(err instanceof Error ? err.message : String(err))
+  process.exit(1)
+}
+
 console.log("converged: wrote " + target)
 console.log("removed: V1 import=" + hadV1Import + ", v1Plugin const=" + hadV1Const + ", server property=" + hadServer)
