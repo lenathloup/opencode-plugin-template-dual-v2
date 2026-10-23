@@ -105,7 +105,7 @@ export default {
 
 // --- Convergence checklist (manual fallback) ---
 // 1. Remove: import type { Plugin as V1Plugin } from "@opencode-ai/plugin"
-// 2. Remove: the `v1Plugin` const and the `server: v1Plugin` property
+// 2. Remove: the v1Plugin const and the server property (server points at v1Plugin)
 // 3. Keep: id, setup(ctx), and the @opencode/plugin import
 // Or run: node templates/converge.mjs <file>
 // Migration guide: https://opencode.ai/v2/docs/build/plugins/migrate-v1

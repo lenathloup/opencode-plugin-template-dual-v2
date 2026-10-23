@@ -114,6 +114,27 @@ function removeTopLevelConst(source, name) {
     }
     if (c === "}" || c === ")" || c === "]") {
       depth--
+      if (c === "}" && depth === 0) {
+        let k = j + 1
+        while (k < source.length && (source[k] === " " || source[k] === "\t")) k++
+        if (k >= source.length) {
+          end = j
+          break
+        }
+        if (source[k] === "\n" || source[k] === "\r") {
+          let k2 = k
+          while (k2 < source.length && (source[k2] === "\n" || source[k2] === "\r")) k2++
+          if (k2 >= source.length) {
+            end = j
+            break
+          }
+          const rest = source.slice(k2)
+          if (!/^,/.test(rest)) {
+            end = j
+            break
+          }
+        }
+      }
       continue
     }
     if (c === ";" && depth === 0) {
